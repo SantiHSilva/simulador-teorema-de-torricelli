@@ -12,8 +12,9 @@ const gravedad = 9.80665;
 
 // Valores iniciales requeridos
 const velocidad = 10;
-const altura_maxima = 200;
+const altura_maxima = 400;
 const altura_minima = 100;
+const dt = 0.05; // intervalo de tiempo
 
 // Calculos de movimiento semi parabolico
 const tiempo = Math.sqrt((2 * altura_maxima) / gravedad);
@@ -30,7 +31,6 @@ ctx.fillRect(0, hSuelo, wSuelo, altura_minima);
 
 // Dibujar la trayectoria del proyectil
 ctx.fillStyle = 'blue';
-const dt = 0.3; // intervalo de tiempo
 let x = 0;
 let y = altura_maxima;
 
