@@ -1,0 +1,32 @@
+canvas{
+    background-color: #ffe342;
+    border: 1px solid black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.form-label{
+    margin-bottom: 0;
+}
+
+.btninfo{
+    background-color: #ffdda6;
+    border: 1px solid #ffdda6;
+}
+
+.btninfo:hover{
+    background-color: #fde3b4;
+    border-color: #ffdda6;
+}
+
+.btnaprox{
+    background-color: #fff7a1;
+    border: 1px solid #fff7a1;
+}
+
+.btnaprox:hover{
+    background-color: #fff8af;
+    border-color: #fff7a1;
+}
