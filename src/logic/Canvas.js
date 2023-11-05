@@ -1,8 +1,9 @@
 import cilindro from "./cilindro.svg";
+import {calcularVelocidad} from "../components/Calculos.jsx";
 
-const canvas = document.getElementById('canvas');
 
 function main(){
+  const canvas = document.getElementById('canvas');
 
   // reiniciar canvas
   const ctx = canvas.getContext('2d');
@@ -16,10 +17,10 @@ function main(){
   // Constantes
   const w = canvas.width;
   const h = canvas.height;
-  const gravedad = 274;
+  const gravedad = 9.81;
 
   // Valores iniciales requeridos
-  const velocidad = 400;
+  const velocidad = calcularVelocidad();
   const altura_maxima = 300;
   const altura_minima = 100;
   const dt = 0.05; // intervalo de tiempo
@@ -68,8 +69,8 @@ function main(){
   }, dt );
 }
 
-window.addEventListener("resize", function() {
-  main();
-});
 
-main();
+
+export{
+  main
+}
