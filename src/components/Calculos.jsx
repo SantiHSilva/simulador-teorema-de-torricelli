@@ -218,7 +218,7 @@ function Calculos({alturaAbertura, setAlturaAbertura, diametroAbertura, setDiame
         >
           <Form.Label>Tiempo</Form.Label>
           <InputGroup>
-            <Form.Control type="number" size='sm' className='text-center' readOnly value={calcularTiempo()}/>
+            <Form.Control id='tiempo' type="number" size='sm' className='text-center' readOnly value={calcularTiempo()}/>
             <Button size={'sm'} disabled variant='success'>s</Button>
           </InputGroup>
         </Form>

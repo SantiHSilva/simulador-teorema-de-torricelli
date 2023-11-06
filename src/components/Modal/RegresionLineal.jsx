@@ -1,9 +1,11 @@
 import {Col, Container} from "react-bootstrap";
 import { InlineMath } from 'react-katex';
-import 'katex/dist/katex.min.css';
+import {calcularVelocidad} from "../Calculos.jsx";
 
+// eslint-disable-next-line react/prop-types
 export default function RegresionLineal(){
   const expresionRegresionLineal = 'v(t) = 20348-2480t = ? m/s';
+  const tiempo = document.getElementById('tiempo').value
 
   return(
     <Col xs={6} style={{padding: '0px',}}
@@ -16,7 +18,7 @@ export default function RegresionLineal(){
       </p>
 
       <p>
-        Dada la velocidad final, puedes hallar una velocidad en un rango de tiempo.
+        Dado un tiempo ({tiempo}), descubre la distancia que recorrio basada en la velocidad del chorro ({calcularVelocidad()}m/s):
       </p>
 
       <InlineMath math={expresionRegresionLineal} />

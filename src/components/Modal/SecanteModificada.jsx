@@ -1,9 +1,52 @@
 import {Col} from "react-bootstrap";
 import { InlineMath } from 'react-katex';
-import 'katex/dist/katex.min.css';
+import functionPlot from "function-plot";
+import {useEffect} from "react";
 
 export default function SecanteModificada(){
+
   const expresionSecanteModificada = 'f(h_2) = \\sqrt{2 * g * (h_2 - h_1) }-100m/s';
+
+  function calculateSecante(){
+    function f(x){
+      const g = 9.81
+      const h_1 = 20
+      return (Math.sqrt(2*g*(x-h_1))-100)
+    }
+    const d = 0.01
+    let x_0 = 20
+    let iteracion = 0
+    const resultados = []
+
+    while(f(x_0) !== 0){
+      iteracion++
+      let x_1 = x_0 - (f(x_0)*(d*x_0))/(f(x_0+(d*x_0))-f(x_0))
+      console.log("Iteración: " + iteracion,x_1, f(x_1))
+      resultados.push({
+        x0: x_0,
+        x1: x_1
+      })
+      x_0 = x_1
+      // Añadir a la lista
+    }
+
+    console.log(resultados)
+    return resultados
+  }
+
+  useEffect(() => {
+    const resultados = calculateSecante()
+    functionPlot({
+      target: '#graficasecante',
+      yAxis: {domain: [-2, 2]},
+      xAxis: {domain: [(529 - 20), (529 + 20)]},
+      data: [{
+        fn: 'sqrt(2*9.81*(x-20))-100',
+        secants: resultados
+      }]
+    })
+  }, []);
+
   return(
     <Col xs={6} style={{padding: '0px',}}
          className='border'
@@ -24,7 +67,9 @@ export default function SecanteModificada(){
         Gráfica del método
       </p>
 
-      <img src="https://cdn.discordapp.com/attachments/1115448661602742316/1170229001730666506/396273447_1351911115454212_860745977931491377_n.png?ex=655847af&is=6545d2af&hm=1f1caf040db5f8339b07a6e8e841c512f005138825b0d9eedcde1a0d0948b36d&" />
+      <div
+        id='graficasecante'
+      />
 
       <p className='m-1 fw-bold'>
         Procedimiento

@@ -10,13 +10,13 @@ export default function AproxDatos({showModal, setShowModal}){
   return(
     <Modal show={showModal} onHide={handleClose} size={'xl'} backdrop="static" keyboard={false}>
       <Modal.Header closeButton>
-        <Modal.Title>Aproximaciones de velocidades</Modal.Title>
+        <Modal.Title>Obtener valores incognitos aproximados con</Modal.Title>
       </Modal.Header>
       <Modal.Body>
 
         <Container>
           <Row className='text-center'>
-            <RegresionLineal />
+           {/* <RegresionLineal />*/}
             <SecanteModificada />
           </Row>
         </Container>
