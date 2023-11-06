@@ -1,8 +1,13 @@
 import {Button, ButtonGroup, Container} from "react-bootstrap";
 import {IconInfoCircle, IconTable} from "@tabler/icons-react";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
+import Info from "./Modal/Info.jsx";
+import AproxDatos from "./Modal/AproxDatos.jsx";
 
 export default function Dashboard(){
+
+  const [showInfo, setShowInfo] = useState(false);
+  const [showAprox, setShowAprox] = useState(false);
 
   useEffect(() => {
     function move(){
@@ -33,6 +38,8 @@ export default function Dashboard(){
         width: '25%',
       }}
     >
+      <Info setShowModal={setShowInfo} showModal={showInfo} />
+      <AproxDatos setShowModal={setShowAprox} showModal={showAprox}/>
       <p
         className='text-center border rounded-bottom'
       >
@@ -46,6 +53,7 @@ export default function Dashboard(){
           <Button
             variant={'none'}
             className={'text-black btninfo'}
+            onClick={() => setShowInfo(true)}
           >
             <IconInfoCircle size={20} /> &nbsp;
             Información
@@ -53,6 +61,7 @@ export default function Dashboard(){
           <Button
             variant={'none'}
             className={'text-black btnaprox'}
+            onClick={() => setShowAprox(true)}
           >
             Aprox. de datos
             &nbsp;<IconTable size={20} />

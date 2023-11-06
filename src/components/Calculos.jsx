@@ -176,7 +176,7 @@ function Calculos({alturaAbertura, setAlturaAbertura, diametroAbertura, setDiame
         >
           <Form.Label>Velocidad</Form.Label>
           <InputGroup>
-            <Form.Control type="number" size='sm' className='text-center' value={calcularVelocidad()}/>
+            <Form.Control type="number" size='sm' className='text-center' readOnly value={calcularVelocidad()}/>
             <Button size={'sm'} disabled variant='success'>m/s</Button>
           </InputGroup>
         </Form>
@@ -188,7 +188,7 @@ function Calculos({alturaAbertura, setAlturaAbertura, diametroAbertura, setDiame
         >
           <Form.Label>Presión interna</Form.Label>
           <InputGroup>
-            <Form.Control type="number" size='sm' className='text-center' value={calcularPresionInterna()}/>
+            <Form.Control type="number" size='sm' className='text-center' readOnly value={calcularPresionInterna()}/>
             <Button size={'sm'} disabled variant='success'>Pascal</Button>
           </InputGroup>
         </Form>
@@ -200,7 +200,7 @@ function Calculos({alturaAbertura, setAlturaAbertura, diametroAbertura, setDiame
         >
           <Form.Label>Área abertura</Form.Label>
           <InputGroup>
-            <Form.Control type="number" size='sm' className='text-center' value={calcularAreaAbertura()}/>
+            <Form.Control type="number" size='sm' className='text-center' readOnly value={calcularAreaAbertura()}/>
             <Button size={'sm'} disabled variant='success'>m²</Button>
           </InputGroup>
         </Form>
@@ -218,7 +218,7 @@ function Calculos({alturaAbertura, setAlturaAbertura, diametroAbertura, setDiame
         >
           <Form.Label>Tiempo</Form.Label>
           <InputGroup>
-            <Form.Control type="number" size='sm' className='text-center' value={calcularTiempo()}/>
+            <Form.Control type="number" size='sm' className='text-center' readOnly value={calcularTiempo()}/>
             <Button size={'sm'} disabled variant='success'>s</Button>
           </InputGroup>
         </Form>
@@ -230,7 +230,7 @@ function Calculos({alturaAbertura, setAlturaAbertura, diametroAbertura, setDiame
         >
           <Form.Label>Distancia</Form.Label>
           <InputGroup>
-            <Form.Control type="number" size='sm' className='text-center' value={calcularDistancia()}/>
+            <Form.Control type="number" size='sm' className='text-center' readOnly value={calcularDistancia()}/>
             <Button size={'sm'} disabled variant='success'>m</Button>
           </InputGroup>
         </Form>
@@ -242,7 +242,7 @@ function Calculos({alturaAbertura, setAlturaAbertura, diametroAbertura, setDiame
         >
           <Form.Label>Caudal</Form.Label>
           <InputGroup>
-            <Form.Control type="number" size='sm' className='text-center' value={calcularCaudal()}/>
+            <Form.Control type="number" size='sm' className='text-center' readOnly value={calcularCaudal()}/>
             <Button size={'sm'} disabled variant='success'>lts/s</Button>
           </InputGroup>
         </Form>
