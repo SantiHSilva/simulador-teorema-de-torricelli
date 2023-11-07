@@ -16,7 +16,7 @@ export default function AproxDatos({showModal, setShowModal}){
 
         <Container>
           <Row className='text-center'>
-           {/* <RegresionLineal />*/}
+            <RegresionLineal />
             <SecanteModificada />
           </Row>
         </Container>

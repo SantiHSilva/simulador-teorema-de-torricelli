@@ -11,7 +11,7 @@ export default function SecanteModificada(){
   const d = 0.01
   const h_1 = parseFloat(document.getElementById('nivelAbertura').value);
   const g = 9.81
-  const expresionSecanteModificada = `f(h_2) = \\sqrt{2 * g * (h_2 - ${h_1}) }-${velocidad}/s = ${raiz} `;
+  const expresionSecanteModificada = `f(h_2) = \\sqrt{2 * g * (h_2 - ${h_1}) }-${velocidad}m/s = ${raiz} `;
   const resultados = []
 
   useEffect(() => {
@@ -63,8 +63,6 @@ export default function SecanteModificada(){
 
   function estilizar(iteracion, x0, x1, error){
 
-    console.log("Iteración: ", iteracion, "x0: ", x0, "x1: ", x1, "error: ", error)
-
     const decimales = 4
     x0 = parseFloat(x0.toFixed(decimales))
     x1 = parseFloat(x1.toFixed(decimales))
@@ -99,6 +97,19 @@ export default function SecanteModificada(){
     )
   }
 
+  function changeVelocity(e){
+    const value = parseFloat(e.target.value)
+    if(isNaN(value)){
+      e.target.value = 0;
+      return;
+    }
+    if(value < 0){
+      e.target.value = 0;
+    } else{
+      setVelocidad(value);
+    }
+  }
+
   return(
     <Col xs={6} style={{padding: '0px',}}
          className='border'
@@ -109,9 +120,10 @@ export default function SecanteModificada(){
         Método de la secante modificada
       </p>
 
-      <p>
+      <Container>
         ¿Cuál debe ser el nivel de agua para que la velocidad de la salida del agua sea de
-        <input type='number' defaultValue={100} onChange={(e) => setVelocidad(parseFloat(e.target.value))}
+        <input type='number' defaultValue={100} onChange={changeVelocity}
+               min={0}
           style={{
             width: '50px',
             border: 'none',
@@ -120,7 +132,7 @@ export default function SecanteModificada(){
           }}
         />
         m/s teniendo en cuenta que el nivel de abertura es de {h_1} metros?
-      </p>
+      </Container>
 
       <InlineMath math={expresionSecanteModificada} />
 
@@ -149,6 +161,11 @@ export default function SecanteModificada(){
         </Container>
 
         {getProcedimiento()}
+
+        <h3>
+          Resultados:
+        </h3>
+          Con un nivel de agua de {raiz} metros, la velocidad de salida del agua es de {velocidad}m/s
 
       </section>
 
