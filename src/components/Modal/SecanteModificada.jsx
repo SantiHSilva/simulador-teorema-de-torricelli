@@ -7,30 +7,33 @@ export default function SecanteModificada(){
 
   const [raiz, setRaiz] = useState(NaN);
   const [resultadosProcedimientos, setResultadosProcedimientos] = useState([])
+  const [velocidad, setVelocidad] = useState(100);
   const d = 0.01
-  const h_1 = 20
+  const h_1 = parseFloat(document.getElementById('nivelAbertura').value);
   const g = 9.81
-  const expresionSecanteModificada = `f(h_2) = \\sqrt{2 * g * (h_2 - ${h_1}) }-100m/s = ${raiz} `;
+  const expresionSecanteModificada = `f(h_2) = \\sqrt{2 * g * (h_2 - ${h_1}) }-${velocidad}/s = ${raiz} `;
   const resultados = []
 
   useEffect(() => {
+    reupdate();
+  }, [velocidad, raiz]);
+
+  function reupdate(){
     functionPlot({
       title: "Gráfica de la secante modificada",
       target: '#graficasecante',
       yAxis: {domain: [-2, 2]},
-      xAxis: {domain: [(529 - 20), (529 + 20)]},
+      xAxis: {domain: [(raiz - 20), (raiz + 20)]},
       data: [{
-        fn: 'sqrt(2*9.81*(x-20))-100',
+        fn: `sqrt(2*9.81*(x-${h_1}))-${velocidad}`,
         secants: resultados
       }]
     })
     recalculate();
-  }, []);
-
-
+  }
 
   function f(x){
-    return (Math.sqrt(2*g*(x-h_1))-100)
+    return (Math.sqrt(2*g*(x-h_1))-velocidad)
   }
 
   function recalculate(){
@@ -75,7 +78,7 @@ export default function SecanteModificada(){
         </h4>
         <InlineMath math={`x_i = ${x0} - \\frac{ ${d} ${x0} * ${f(x0)} }{ ${f(x0+(d*x0))} - ${f(x0)}} = ${x1}`} />
         <br/><br/>
-        <InlineMath math={`f(${x1}) = \\sqrt{2 * ${g} * (${x1} - ${h_1}) }-100m/s = ${f(x1).toFixed(4)}`} />
+        <InlineMath math={`f(${x1}) = \\sqrt{2 * ${g} * (${x1} - ${h_1}) }-${velocidad}m/s = ${f(x1).toFixed(4)}`} />
         <br/><br/>
         <InlineMath math={`E_r = |\\frac{ ${x0}-${x1}}{${x0}}| * 100\\% = ${error} \\%`}/>
       </Container>
@@ -85,7 +88,13 @@ export default function SecanteModificada(){
   function getProcedimiento(){
     return(
       <Container>
-        {resultadosProcedimientos}
+        {resultadosProcedimientos.map((resultadosProcedimiento) => (
+          <div
+            key={resultadosProcedimiento.props.children[0].props.children}
+          >
+            {resultadosProcedimiento}
+          </div>
+        ))}
       </Container>
     )
   }
@@ -101,7 +110,16 @@ export default function SecanteModificada(){
       </p>
 
       <p>
-        ¿Cuál debe ser el nivel de agua para que la velocidad de la salida del agua sea de 100m/s teniendo en cuenta que el nivel de abertura es de n metros?
+        ¿Cuál debe ser el nivel de agua para que la velocidad de la salida del agua sea de
+        <input type='number' defaultValue={100} onChange={(e) => setVelocidad(parseFloat(e.target.value))}
+          style={{
+            width: '50px',
+            border: 'none',
+            borderBottom: '1px solid black',
+            textAlign: 'center'
+          }}
+        />
+        m/s teniendo en cuenta que el nivel de abertura es de {h_1} metros?
       </p>
 
       <InlineMath math={expresionSecanteModificada} />
@@ -127,7 +145,7 @@ export default function SecanteModificada(){
         <InlineMath math={'E_r = |\\frac{x_0-x_i}{x_0}| * 100\\%'}/>
         <br/> <br/>
         <Container>
-          Para hallar el valor del nivel de agua que necesitaremos para que la velocidad de salida del agua sea de 100m/s, utilizaremos el método de la secante modificada para hallar el valor de x iterando hasta que el error sea menor a 0.01% o hasta encontrar la raíz.
+          Para hallar el valor del nivel de agua que necesitaremos para que la velocidad de salida del agua sea de {velocidad}m/s, utilizaremos el método de la secante modificada para hallar el valor de x iterando hasta que el error sea menor a 0.01% o hasta encontrar la raíz.
         </Container>
 
         {getProcedimiento()}
