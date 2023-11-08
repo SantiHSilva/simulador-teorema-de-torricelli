@@ -1,6 +1,7 @@
 import cilindro from "./cilindro.svg";
 import {calcularVelocidad} from "../components/Calculos.jsx";
 
+let proceso;
 
 function main(){
   const canvas = document.getElementById('canvas');
@@ -9,6 +10,7 @@ function main(){
   const ctx = canvas.getContext('2d');
   ctx.clearRect(0, 0, canvas.width, canvas.height);
   // clear all intervals
+  clearInterval(proceso)
   
 
   // hacer el canvas de tamaño completo
@@ -49,7 +51,7 @@ function main(){
   }
 
 
-  const drawProjectile = setInterval(() => {
+  proceso = setInterval(() => {
 
     function draw(x,y){
       ctx.beginPath();
@@ -66,7 +68,7 @@ function main(){
     y = altura_maxima - (0.5 * gravedad * Math.pow((x / velocidad), 2));
 
     if (y <= altura_minima) {
-      clearInterval(drawProjectile);
+      clearInterval(proceso);
     }
   }, dt );
 }
