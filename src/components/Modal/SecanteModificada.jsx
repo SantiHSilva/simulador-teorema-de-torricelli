@@ -13,6 +13,7 @@ export default function SecanteModificada(){
   const g = 9.81
   const expresionSecanteModificada = `f(h_2) = \\sqrt{2 * g * (h_2 - ${h_1}) }-${velocidad}m/s = ${raiz} `;
   const resultados = []
+  const [tablaResultados, setTablaResultados] = useState([])
 
   useEffect(() => {
     reupdate();
@@ -54,6 +55,14 @@ export default function SecanteModificada(){
         x0: x_0,
         x1: x_1
       })
+      const tableTemp = {
+        iteracion: iteracion,
+        x0: x_0,
+        x1: x_1,
+        fx1: f(x_1),
+        error: error
+      }
+      setTablaResultados(tablaResultados => [...tablaResultados, tableTemp])
 
       x_0 = x_1
     }
@@ -110,6 +119,35 @@ export default function SecanteModificada(){
     }
   }
 
+  function genTable(){
+    return(
+      <Container>
+        <table className="table table-bordered">
+          <thead>
+          <tr>
+            <th scope="col">Iteración</th>
+            <th scope="col">x<sub>0</sub></th>
+            <th scope="col">x<sub>1</sub></th>
+            <th scope="col">f(x<sub>1</sub>)</th>
+            <th scope="col">E<sub>r</sub></th>
+          </tr>
+          </thead>
+          <tbody>
+          {tablaResultados.map((tablaResultado) => (
+            <tr key={tablaResultado.iteracion}>
+              <td>{tablaResultado.iteracion}</td>
+              <td>{Math.round(tablaResultado.x0)}</td>
+              <td>{Math.round(tablaResultado.x1)}</td>
+              <td>{tablaResultado.fx1.toFixed(4)}</td>
+              <td>{tablaResultado.error.toFixed(4)}</td>
+            </tr>
+          ))}
+          </tbody>
+        </table>
+      </Container>
+    )
+  }
+
   return(
     <Col xs={6} style={{padding: '0px',}}
          className='border'
@@ -143,6 +181,16 @@ export default function SecanteModificada(){
       <div
         id='graficasecante'
       />
+
+      <section>
+        <h4>
+          Tabla de datos
+        </h4>
+
+        {
+          genTable()
+        }
+      </section>
 
       <p className='m-1 fw-bold'>
         Procedimiento
